@@ -22,18 +22,23 @@
         }
 
         function likeTrack(trackId) {
-            fetch(`/like/${trackId}/`, {
-                method: 'POST',
-                headers: {
-                    'X-CSRFToken': getCookie('csrftoken')
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                const count = document.getElementById(`like-count-${trackId}`);
-                count.innerText = `(${data.like_count})`;
-            });
+    fetch(`/like/${trackId}/`, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken')
         }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            alert(data.error);  
+            return;
+        }
+        const count = document.getElementById(`like-count-${trackId}`);
+        count.innerText = `(${data.like_count})`;
+    });
+}
+
     </script>
 </head>
 <body class="view-tracks-body">

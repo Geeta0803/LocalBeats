@@ -110,6 +110,12 @@ def like_track(request, track_id):
         track = get_object_or_404(Track, id=track_id)
         user = request.user
 
+        
+        if track.uploaded_by == user:
+            return JsonResponse({
+                'error': "You cannot like your own track."
+            }, status=200)  # We return 200 so JS can still handle it normally
+
         if user in track.likes.all():
             track.likes.remove(user)
             liked = False
