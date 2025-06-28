@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <title>All Tracks</title>
+    <script>
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.startsWith(name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        function likeTrack(trackId) {
+            fetch(`/like/${trackId}/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken')
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const count = document.getElementById(`like-count-${trackId}`);
+                count.innerText = `(${data.like_count})`;
+            });
+        }
+    </script>
+</head>
+<body class="view-tracks-body">
+    <div class="track-page">
+        <h1>🎵 Uploaded Tracks 🎶</h1>
+
+        <!-- Search Form -->
+        <form method="get" action="{% url 'view_tracks' %}">
+            <input type="text" name="q" placeholder="Search by title or artist" value="{{ query|default:'' }}" class="search-input">
+            <button type="submit" class="search-btn">Search</button>
+        </form>
+
+        <hr>
+
+        {% for track in tracks %}
+        <div style="margin-bottom: 30px;">
+            <h3>{{ track.title }} by {{ track.artist }}
+                {% if track.uploaded_by %}
+                    (Uploaded by: {{ track.uploaded_by.username }})
+                {% endif %}
+            </h3>
+
+            <audio controls class="audio-custom">
+                <source src="{{ track.audio_file.url }}" type="audio/mpeg">
+                Your browser does not support the audio tag.
+            </audio>
+
+            <br><br>
+
+            <!-- Like Button -->
+            <div class="button-row">
+               <div class="like-wrapper">
+                    <button id="like-btn-{{ track.id }}" onclick="likeTrack({{ track.id }})">👍 Likes</button>
+                    <span class="like-count" id="like-count-{{ track.id }}">{{ track.likes.count }}</span>
+                </div>
+
+                <a href="{% url 'delete_track' track.id %}">
+                    <button type="button" class="delete-btn">Delete</button>
+                </a>
+            </div>
+        </div>
+        <hr>
+        {% empty %}
+        <p>No tracks uploaded yet.</p>
+        {% endfor %}
+
+        <br>
+        <!-- Navigation Buttons -->
+        <a href="{% url 'upload' %}">
+            <button type="button" class="upload-btn">Upload Another</button>
+        </a>
+
+        <a href="{% url 'home2' %}">
+            <button type="button" class="view-btn">My Profile</button>
+        </a>
+
+        <a href="{% url 'logout' %}">
+            <button type="button" class="logout-btn">Logout</button>
+        </a>
+    </div>
+
+    {% if messages %}
+<script>
+    {% for message in messages %}
+        alert("{{ message|escapejs }}");
+    {% endfor %}
+</script>
+{% endif %}
+
+
+</body>
+
+</html>

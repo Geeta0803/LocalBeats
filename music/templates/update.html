@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <title>Uploaded Track</title>
+</head>
+<body class="update-body">
+    <div class="update-container">
+    <h2> "{{ track.title }}" by {{ track.artist }} has been uploaded succesfully!!!</h2>
+       <div class="update-nav">
+            <a href="{% url 'view_tracks' %}"><button class="btn upload-btn">🎧 View all Tracks</button></a>
+            <a href="{% url 'logout' %}"><button class="btn logout-btn">🚪 Logout</button></a>
+            <a href="{% url 'home2' %}"><button class="btn profile-btn">👤 My Profile</button></a>
+        </div>
+    </div>
+</body>
+</html>

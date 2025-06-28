@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <title>Welcome to Local Beats</title>
+</head>
+<body>
+    <div class="centered-content">
+        <h1>🎵 Welcome to Local Beats 🎵</h1>
+        <p>Your space to upload and explore local music talent!</p>
+        
+        <div class="button-container">
+            <a href="{% url 'login' %}"><button>Login</button></a>
+            <a href="{% url 'signup' %}"><button>Signup</button></a>
+        </div>
+    </div>
+</body>
+
+</html>

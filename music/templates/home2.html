@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>{{ user.username }}'s Profile</title>
+</head>
+<body class="profile-body">
+
+    <div class="profile-container">
+        <h1>Welcome, {{ user.username }} 👋</h1>
+
+        {% if user.email %}
+            <p class="email-text">📧 {{ user.email }}</p>
+        {% endif %}
+
+        <h2>Your Uploaded Tracks 🎶</h2>
+
+        {% if tracks %}
+            <ul class="track-list">
+                {% for track in tracks %}
+                    <li class="track-item">
+                        <strong>{{ track.title }}</strong> by {{ track.artist }} — Likes: {{ track.likes.count }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="no-track-msg">🎵 You haven't uploaded any tracks yet.</p>
+        {% endif %}
+
+        <div class="button-group">
+            <a href="{% url 'upload' %}"><button class="btn upload-btn">⬆️ Upload</button></a>
+            <a href="{% url 'view_tracks' %}"><button class="btn view-btn">🎧 View All Tracks</button></a>
+            <a href="{% url 'logout' %}"><button class="btn logout-btn">🚪 Logout</button></a>
+        </div>
+    </div>
+
+</body>
+</html>

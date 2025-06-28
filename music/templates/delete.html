@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+     {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <title>Delete Track</title>
+</head>
+<body class="update-body">
+    <div class="update-container">
+    <h2>Delete Confirmation</h2>
+    <p>Are you sure you want to delete "{{ track.title }}" by {{ track.artist }}?</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Yes, Delete</button>
+        <a href="{% url 'view_tracks' %}"><button type="button">Cancel</button></a>
+    </form>
+
+    </div>
+</body>
+</html>

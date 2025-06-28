@@ -1,0 +1,24 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.env
+.venv
+/venv/
+/env/
+/*.egg-info/
+
+# ---- Django ----
+db.sqlite3
+media/
+staticfiles/             # if you run collectstatic locally
+*.log
+
+# ---- VSCode / IDE ----
+.vscode/
+.idea/
+
+# ---- OS junk ----
+.DS_Store
+Thumbs.db

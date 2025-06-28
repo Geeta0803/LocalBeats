@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Upload Track</title>
+</head>
+<body class="upload-body">
+
+    <div class="upload-container">
+        <h1>Upload Your Music 🎵</h1>
+
+        <form method="POST" enctype="multipart/form-data" class="upload-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn upload-btn">Upload</button>
+        </form>
+
+        <div class="upload-nav">
+            <a href="{% url 'view_tracks' %}"><button class="btn view-btn">🎧 View All Tracks</button></a>
+            <a href="{% url 'logout' %}"><button class="btn logout-btn">🚪 Logout</button></a>
+            <a href="{% url 'home2' %}"><button class="btn profile-btn">👤 My Profile</button></a>
+        </div>
+    </div>
+
+</body>
+</html>

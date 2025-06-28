@@ -1,0 +1,32 @@
+<head>
+    {% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+<div class="form-container">
+<h2>Login</h2>
+<form method="POST">
+    {% csrf_token %}
+    <label>Username:</label><br>
+    <input type="text" name="username" required><br>
+    <label>Password:</label><br>
+    <input type="password" name="password" required><br><br>
+    <button type="submit">Login</button>
+</form>
+
+{% if messages %}
+    <ul>
+        {% for message in messages %}
+            <li style="color: red;">{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+
+<p>Don't have an account? <a href="{% url 'signup' %}">Signup here</a></p>
+
+<a href="{% url 'logout' %}">
+        <button type="button" class="logout-btn">Logout</button>
+    </a>
+
+    </div>
