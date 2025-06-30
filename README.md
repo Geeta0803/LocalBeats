@@ -15,7 +15,8 @@ The platform is live on Render and uses PostgreSQL for persistent data storage.
 ❤️ **Like System** – Like tracks uploaded by other users  
 🗑️ **Track Deletion** – Only track owners can delete their own uploads  
 👤 **User Profiles** – View a user’s uploaded tracks and total likes  
-📃 **Explore Page** – Browse all tracks uploaded by all users
+📃 **Explore Page** – Browse all tracks uploaded by all users 
+
 🔍 **Search Tracks** – Search by song title or artist name   
 🧱 **Admin Dashboard** – Manage all models via Django Admin
 
