@@ -62,7 +62,8 @@
             </h3>
 
             <audio controls class="audio-custom">
-                <source src="{{ track.audio_file.url }}" type="audio/mpeg">
+               <source src="{{ track.audio_file.url }}?v={{ track.id }}" type="audio/mpeg">
+
                 Your browser does not support the audio tag.
             </audio>
 
